@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Precificador de Caixas Convencionais</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #4a90e2;
+        }
+        .form-container {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4a90e2;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #357abd;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e7f3fe;
+            border: 1px solid #b3d4fc;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 24px;
+            color: #31708f;
+            display: none; /* Ocultar inicialmente */
+        }
+    </style>
+</head>
+<body>
+    <h1>Precificador de Caixas Convencionais</h1>
+    <div class="form-container">
+        <div class="form-group">
+            <label for="comprimento">Comprimento (cm)</label>
+            <input type="number" id="comprimento" required>
+        </div>
+        <div class="form-group">
+            <label for="largura">Largura (cm)</label>
+            <input type="number" id="largura" required>
+        </div>
+        <div class="form-group">
+            <label for="altura">Altura (cm)</label>
+            <input type="number" id="altura" required>
+        </div>
+        <div class="form-group">
+            <label for="gramatura">Gramatura (g/m²)</label>
+            <input type="number" id="gramatura" required>
+        </div>
+        <div class="form-group">
+            <label for="precoKg">Preço por KG (R$)</label>
+            <input type="number" id="precoKg" required>
+        </div>
+        <button onclick="calcularValor()">Calcular Valor de Custo</button>
+
+        <div class="result" id="resultado">
+            Valor de Custo: R$ <span id="valorCusto"></span>
+        </div>
+    </div>
+
+    <script>
+        function calcularValor() {
+            const comprimento = parseFloat(document.getElementById('comprimento').value);
+            const largura = parseFloat(document.getElementById('largura').value);
+            const altura = parseFloat(document.getElementById('altura').value);
+            const gramatura = parseFloat(document.getElementById('gramatura').value);
+            const precoKg = parseFloat(document.getElementById('precoKg').value);
+
+            const valorCusto = (((comprimento + largura) * 2 + 5) * (altura + largura)) * gramatura * precoKg / 10000000;
+
+            document.getElementById('valorCusto').innerText = valorCusto.toFixed(2);
+            document.getElementById('resultado').style.display = 'block'; // Mostrar resultado
+        }
+    </script>
+</body>
+</html>
